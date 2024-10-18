@@ -305,55 +305,78 @@
             }
         }
 
-        function showResult() {
-            const scores = {
-                E100: 0,
-                E200: 0,
-                E300: 0,
-                E330: 0,
-                E621: 0,
-                E951: 0,  // Новый вариант
-                E1300: 0, // Новый вариант
-                E1500: 0, // Новый вариант
-                E2000: 0, // Новый вариант
-                E2500: 0  // Новый вариант
-            };
+       function showResult() {
+    const scores = {
+        E100: 0,
+        E200: 0,
+        E300: 0,
+        E330: 0,
+        E621: 0,
+        E951: 0,
+        E1300: 0,
+        E1500: 0,
+        E2000: 0,
+        E2500: 0
+    };
 
-            for (let i = 1; i <= questions.length; i++) {
-                const answer = document.querySelector(`input[name="q${i}"]:checked`);
-                if (answer) {
-                    scores[answer.value]++;
-                }
-            }
-
-            let resultAdditive;
-            const maxScore = Math.max(...Object.values(scores));
-            if (maxScore === scores.E100) {
-                resultAdditive = 'E100 - Краситель (например, бетанин)';
-            } else if (maxScore === scores.E200) {
-                resultAdditive = 'E200 - Консервант (например, бензоат натрия)';
-            } else if (maxScore === scores.E300) {
-                resultAdditive = 'E300 - Антиоксидант (например, аскорбиновая кислота)';
-            } else if (maxScore === scores.E330) {
-                resultAdditive = 'E330 - Консервант (например, лимонная кислота)';
-            } else if (maxScore === scores.E621) {
-                resultAdditive = 'E621 - Усилитель вкуса (например, глутамат натрия)';
-            } else if (maxScore === scores.E951) {
-                resultAdditive = 'E951 - Искусственный подсластитель (например, аспартам)';
-            } else if (maxScore === scores.E1300) {
-                resultAdditive = 'E1300 - Продукт, который улучшает текстуру (например, ксантановая камедь)';
-            } else if (maxScore === scores.E1500) {
-                resultAdditive = 'E1500 - Консервант (например, карамель)';
-            } else if (maxScore === scores.E2000) {
-                resultAdditive = 'E2000 - Эмульгатор (например, лецитин)';
-            } else {
-                resultAdditive = 'E2500 - Увлажнитель (например, глицерин)';
-            }
-
-            document.getElementById('result').innerHTML = `Ты: ${resultAdditive}`;
-            document.getElementById('result').style.display = 'block';
-            sendMessage(resultAdditive);
+    // Подсчет результатов
+    for (let i = 1; i <= questions.length; i++) {
+        const answer = document.querySelector(`input[name="q${i}"]:checked`);
+        if (answer) {
+            scores[answer.value]++;
         }
+    }
+
+    // Находим максимальный результат
+    const maxScore = Math.max(...Object.values(scores));
+
+    // Составляем список всех результатов с максимальными значениями
+    const possibleResults = Object.keys(scores).filter(key => scores[key] === maxScore);
+
+    // Случайный выбор из возможных результатов
+    const randomResult = possibleResults[Math.floor(Math.random() * possibleResults.length)];
+
+    let resultAdditive;
+    switch (randomResult) {
+        case 'E100':
+            resultAdditive = 'E100 - Краситель (например, бетанин)';
+            break;
+        case 'E200':
+            resultAdditive = 'E200 - Консервант (например, бензоат натрия)';
+            break;
+        case 'E300':
+            resultAdditive = 'E300 - Антиоксидант (например, аскорбиновая кислота)';
+            break;
+        case 'E330':
+            resultAdditive = 'E330 - Консервант (например, лимонная кислота)';
+            break;
+        case 'E621':
+            resultAdditive = 'E621 - Усилитель вкуса (например, глутамат натрия)';
+            break;
+        case 'E951':
+            resultAdditive = 'E951 - Искусственный подсластитель (например, аспартам)';
+            break;
+        case 'E1300':
+            resultAdditive = 'E1300 - Продукт, который улучшает текстуру (например, ксантановая камедь)';
+            break;
+        case 'E1500':
+            resultAdditive = 'E1500 - Консервант (например, карамель)';
+            break;
+        case 'E2000':
+            resultAdditive = 'E2000 - Эмульгатор (например, лецитин)';
+            break;
+        default:
+            resultAdditive = 'E2500 - Увлажнитель (например, глицерин)';
+            break;
+    }
+
+    // Отображение результата
+    document.getElementById('result').innerHTML = `Ты: ${resultAdditive}`;
+    document.getElementById('result').style.display = 'block';
+
+    // Отправляем сообщение
+    sendMessage(resultAdditive);
+}
     </script>
 </body>
 </html>
