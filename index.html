@@ -306,6 +306,19 @@
         }
 
        function showResult() {
+               const scoreAdd = {
+        E100: 1,
+        E200: 2,
+        E300: 5,
+        E330: 10,
+        E621: 15,
+        E951: 20,
+        E1300: 20,
+        E1500: 20,
+        E2000: 20,
+        E2500: 20
+    };
+           
     const scores = {
         E100: 0,
         E200: 0,
@@ -323,7 +336,7 @@
     for (let i = 1; i <= questions.length; i++) {
         const answer = document.querySelector(`input[name="q${i}"]:checked`);
         if (answer) {
-            scores[answer.value]++;
+            scores[answer.value] += scoreAdd[answer.value];
         }
     }
 
