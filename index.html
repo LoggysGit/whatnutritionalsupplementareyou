@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест: Какая ты пищевая добавка</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .question {
+            display: none;
+            margin-bottom: 20px;
+        }
+
+            .question.active {
+                display: block;
+            }
+
+        .button-container {
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+        }
+
+            button:disabled {
+                background-color: #ccc;
+            }
+
+        .result {
+            text-align: center;
+            font-size: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input id="name-input" placeholder="Введите имя"/>
+        <h1>Тест: Какая ты пищевая добавка</h1>
+        <form id="quizForm">
+            <div class="question active" id="question1">
+                <p>1. Как ты себя обычно чувствуешь?</p>
+                <input type="radio" name="q1" value="E100" onchange="enableNextButton();"> Веселым и энергичным.<br>
+                <input type="radio" name="q1" value="E200" onchange="enableNextButton()"> Спокойным и умиротворенным.<br>
+                <input type="radio" name="q1" value="E300" onchange="enableNextButton()"> Задумчивым и меланхоличным.<br>
+                <input type="radio" name="q1" value="E330" onchange="enableNextButton()"> Прагматичным и сосредоточенным.<br>
+                <input type="radio" name="q1" value="E621" onchange="enableNextButton()"> Настороженным и критичным.<br>
+            </div>
+
+            <div class="question" id="question2">
+                <p>2. Какой твой любимый способ отдыха?</p>
+                <input type="radio" name="q2" value="E100" onchange="enableNextButton()"> Чтение книги.<br>
+                <input type="radio" name="q2" value="E200" onchange="enableNextButton()"> Поездки на природу.<br>
+                <input type="radio" name="q2" value="E300" onchange="enableNextButton()"> Спорт и физическая активность.<br>
+                <input type="radio" name="q2" value="E330" onchange="enableNextButton()"> Встречи с друзьями.<br>
+                <input type="radio" name="q2" value="E621" onchange="enableNextButton()"> Просмотр фильмов или сериалов.<br>
+            </div>
+
+            <div class="question" id="question3">
+                <p>3. Как ты относишься к новому?</p>
+                <input type="radio" name="q3" value="E100" onchange="enableNextButton()"> Всегда открыт к экспериментам.<br>
+                <input type="radio" name="q3" value="E200" onchange="enableNextButton()"> Предпочитаю что-то знакомое.<br>
+                <input type="radio" name="q3" value="E300" onchange="enableNextButton()"> Люблю новые идеи, но осторожен.<br>
+                <input type="radio" name="q3" value="E330" onchange="enableNextButton()"> В зависимости от настроения.<br>
+                <input type="radio" name="q3" value="E621" onchange="enableNextButton()"> Иногда да, иногда нет.<br>
+            </div>
+
+            <div class="question" id="question4">
+                <p>4. Как ты справляешься со стрессом?</p>
+                <input type="radio" name="q4" value="E100" onchange="enableNextButton()"> Занимаюсь спортом.<br>
+                <input type="radio" name="q4" value="E200" onchange="enableNextButton()"> Медитирую.<br>
+                <input type="radio" name="q4" value="E300" onchange="enableNextButton()"> Разговариваю с друзьями.<br>
+                <input type="radio" name="q4" value="E330" onchange="enableNextButton()"> Читаю книги.<br>
+                <input type="radio" name="q4" value="E621" onchange="enableNextButton()"> Убегаю от проблем.<br>
+            </div>
+
+            <div class="question" id="question5">
+                <p>5. Как ты проводишь выходные?</p>
+                <input type="radio" name="q5" value="E100" onchange="enableNextButton()"> Активно отдыхаю.<br>
+                <input type="radio" name="q5" value="E200" onchange="enableNextButton()"> Занимаюсь домашними делами.<br>
+                <input type="radio" name="q5" value="E300" onchange="enableNextButton()"> Провожу время с семьей.<br>
+                <input type="radio" name="q5" value="E330" onchange="enableNextButton()"> Изучаю что-то новое.<br>
+                <input type="radio" name="q5" value="E621" onchange="enableNextButton()"> Лежу дома и ничего не делаю.<br>
+            </div>
+
+            <div class="question" id="question6">
+                <p>6. Что для тебя важно в жизни?</p>
+                <input type="radio" name="q6" value="E100" onchange="enableNextButton()"> Семья и близкие.<br>
+                <input type="radio" name="q6" value="E200" onchange="enableNextButton()"> Достижения и успех.<br>
+                <input type="radio" name="q6" value="E300" onchange="enableNextButton()"> Здоровье и благополучие.<br>
+                <input type="radio" name="q6" value="E330" onchange="enableNextButton()"> Новые впечатления.<br>
+                <input type="radio" name="q6" value="E621" onchange="enableNextButton()"> Спокойствие и стабильность.<br>
+            </div>
+
+            <div class="question" id="question7">
+                <p>7. Как ты себя воспринимаешь?</p>
+                <input type="radio" name="q7" value="E100" onchange="enableNextButton()"> Уверенный в себе человек.<br>
+                <input type="radio" name="q7" value="E200" onchange="enableNextButton()"> Сомневаюсь в своих способностях.<br>
+                <input type="radio" name="q7" value="E300" onchange="enableNextButton()"> Стремлюсь к улучшению.<br>
+                <input type="radio" name="q7" value="E330" onchange="enableNextButton()"> У меня есть свои сильные стороны.<br>
+                <input type="radio" name="q7" value="E621" onchange="enableNextButton()"> Не задумываюсь об этом.<br>
+            </div>
+
+            <div class="question" id="question8">
+                <p>8. Какой стиль общения тебе нравится?</p>
+                <input type="radio" name="q8" value="E100" onchange="enableNextButton()"> Открытый и честный.<br>
+                <input type="radio" name="q8" value="E200" onchange="enableNextButton()"> Дипломатичный и учтивый.<br>
+                <input type="radio" name="q8" value="E300" onchange="enableNextButton()"> Неформальный и свободный.<br>
+                <input type="radio" name="q8" value="E330" onchange="enableNextButton()"> С юмором.<br>
+                <input type="radio" name="q8" value="E621" onchange="enableNextButton()"> Не люблю много говорить.<br>
+            </div>
+
+            <div class="question" id="question9">
+                <p>9. Как ты проводишь свободное время?</p>
+                <input type="radio" name="q9" value="E100" onchange="enableNextButton()"> Занимаюсь хобби.<br>
+                <input type="radio" name="q9" value="E200" onchange="enableNextButton()"> Встречаюсь с друзьями.<br>
+                <input type="radio" name="q9" value="E300" onchange="enableNextButton()"> Смотрю сериалы.<br>
+                <input type="radio" name="q9" value="E330" onchange="enableNextButton()"> Путешествую.<br>
+                <input type="radio" name="q9" value="E621" onchange="enableNextButton()"> Читаю или слушаю музыку.<br>
+            </div>
+
+            <div class="question" id="question10">
+                <p>10. Какой ты тип личности?</p>
+                <input type="radio" name="q10" value="E100" onchange="enableNextButton()"> Энергичный и оптимистичный.<br>
+                <input type="radio" name="q10" value="E200" onchange="enableNextButton()"> Спокойный и уравновешенный.<br>
+                <input type="radio" name="q10" value="E300" onchange="enableNextButton()"> Творческий и креативный.<br>
+                <input type="radio" name="q10" value="E330" onchange="enableNextButton()"> Практичный и реалистичный.<br>
+                <input type="radio" name="q10" value="E621" onchange="enableNextButton()"> Аналитический и серьезный.<br>
+            </div>
+
+            <div class="question" id="question11">
+                <p>11. Как ты относишься к здоровому питанию?</p>
+                <input type="radio" name="q11" value="E100" onchange="enableNextButton()"> Стараюсь соблюдать его.<br>
+                <input type="radio" name="q11" value="E200" onchange="enableNextButton()"> Иногда, когда удобно.<br>
+                <input type="radio" name="q11" value="E300" onchange="enableNextButton()"> Пытаюсь, но не всегда получается.<br>
+                <input type="radio" name="q11" value="E330" onchange="enableNextButton()"> Не слишком заморачиваюсь.<br>
+                <input type="radio" name="q11" value="E621" onchange="enableNextButton()"> Не верю в его важность.<br>
+            </div>
+
+            <div class="question" id="question12">
+                <p>12. Какой у тебя любимый вкус?</p>
+                <input type="radio" name="q12" value="E100" onchange="enableNextButton()"> Сладкий.<br>
+                <input type="radio" name="q12" value="E200" onchange="enableNextButton()"> Соленый.<br>
+                <input type="radio" name="q12" value="E300" onchange="enableNextButton()"> Кислый.<br>
+                <input type="radio" name="q12" value="E330" onchange="enableNextButton()"> Острый.<br>
+                <input type="radio" name="q12" value="E621" onchange="enableNextButton()"> Горький.<br>
+            </div>
+
+            <div class="question" id="question13">
+                <p>13. Как ты оцениваешь свою эмоциональность?</p>
+                <input type="radio" name="q13" value="E100" onchange="enableNextButton()"> Очень эмоционален.<br>
+                <input type="radio" name="q13" value="E200" onchange="enableNextButton()"> Умеренно эмоционален.<br>
+                <input type="radio" name="q13" value="E300" onchange="enableNextButton()"> Эмоции зависят от ситуации.<br>
+                <input type="radio" name="q13" value="E330" onchange="enableNextButton()"> Стараюсь держать эмоции под контролем.<br>
+                <input type="radio" name="q13" value="E621" onchange="enableNextButton()"> Обычно спокойный.<br>
+            </div>
+
+            <div class="question" id="question14">
+                <p>14. Как ты воспринимаешь изменения?</p>
+                <input type="radio" name="q14" value="E100" onchange="enableNextButton()"> С радостью.<br>
+                <input type="radio" name="q14" value="E200" onchange="enableNextButton()"> С осторожностью.<br>
+                <input type="radio" name="q14" value="E300" onchange="enableNextButton()"> Нейтрально.<br>
+                <input type="radio" name="q14" value="E330" onchange="enableNextButton()"> Иногда позитивно, иногда негативно.<br>
+                <input type="radio" name="q14" value="E621" onchange="enableNextButton()"> Предпочитаю стабильность.<br>
+            </div>
+
+            <div class="question" id="question15">
+                <p>15. Как ты относишься к критике?</p>
+                <input type="radio" name="q15" value="E100" onchange="enableNextButton()"> Принимаю конструктивную критику.<br>
+                <input type="radio" name="q15" value="E200" onchange="enableNextButton()"> Неприятно, но принимаю.<br>
+                <input type="radio" name="q15" value="E300" onchange="enableNextButton()"> Зависит от ситуации.<br>
+                <input type="radio" name="q15" value="E330" onchange="enableNextButton()"> Игнорирую.<br>
+                <input type="radio" name="q15" value="E621" onchange="enableNextButton()"> Не люблю критику.<br>
+            </div>
+
+            <div class="question" id="question16">
+                <p>16. Как ты относишься к новым знакомствам?</p>
+                <input type="radio" name="q16" value="E100" onchange="enableNextButton()"> Всегда рад новым знакомствам.<br>
+                <input type="radio" name="q16" value="E200" onchange="enableNextButton()"> Иногда завожу новые знакомства.<br>
+                <input type="radio" name="q16" value="E300" onchange="enableNextButton()"> Предпочитаю старые знакомства.<br>
+                <input type="radio" name="q16" value="E330" onchange="enableNextButton()"> Зависит от ситуации.<br>
+                <input type="radio" name="q16" value="E621" onchange="enableNextButton()"> Не ищу новых знакомств.<br>
+            </div>
+
+            <div class="question" id="question17">
+                <p>17. Как ты справляешься с трудностями?</p>
+                <input type="radio" name="q17" value="E100" onchange="enableNextButton()"> Стремлюсь найти решение.<br>
+                <input type="radio" name="q17" value="E200" onchange="enableNextButton()"> Сначала переживаю.<br>
+                <input type="radio" name="q17" value="E300" onchange="enableNextButton()"> Зависит от проблемы.<br>
+                <input type="radio" name="q17" value="E330" onchange="enableNextButton()"> Прошу совета у друзей.<br>
+                <input type="radio" name="q17" value="E621" onchange="enableNextButton()"> Скрываю свои переживания.<br>
+            </div>
+
+            <div class="question" id="question18">
+                <p>18. Как ты обычно принимаешь решения?</p>
+                <input type="radio" name="q18" value="E100" onchange="enableNextButton()"> Быстро и уверенно.<br>
+                <input type="radio" name="q18" value="E200" onchange="enableNextButton()"> Долго размышляю.<br>
+                <input type="radio" name="q18" value="E300" onchange="enableNextButton()"> Анализирую все за и против.<br>
+                <input type="radio" name="q18" value="E330" onchange="enableNextButton()"> Опираюсь на интуицию.<br>
+                <input type="radio" name="q18" value="E621" onchange="enableNextButton()"> Делаю выбор в последний момент.<br>
+            </div>
+
+            <div class="question" id="question19">
+                <p>19. Как ты относишься к своей внешности?</p>
+                <input type="radio" name="q19" value="E100" onchange="enableNextButton()"> Забочусь о ней.<br>
+                <input type="radio" name="q19" value="E200" onchange="enableNextButton()"> Неплохо, но не слишком.<br>
+                <input type="radio" name="q19" value="E300" onchange="enableNextButton()"> Не задумываюсь об этом.<br>
+                <input type="radio" name="q19" value="E330" onchange="enableNextButton()"> Принимаю себя таким, какой есть.<br>
+                <input type="radio" name="q19" value="E621" onchange="enableNextButton()"> Зависит от настроения.<br>
+            </div>
+
+            <div class="question" id="question20">
+                <p>20. Как ты относишься к своей жизни?</p>
+                <input type="radio" name="q20" value="E100" onchange="enableNextButton()"> С благодарностью и оптимизмом.<br>
+                <input type="radio" name="q20" value="E200" onchange="enableNextButton()"> Есть свои трудности, но в целом нормально.<br>
+                <input type="radio" name="q20" value="E300" onchange="enableNextButton()"> Неплохо, но всегда можно лучше.<br>
+                <input type="radio" name="q20" value="E330" onchange="enableNextButton()"> Зависит от обстоятельств.<br>
+                <input type="radio" name="q20" value="E621" onchange="enableNextButton()"> У меня много вопросов.<br>
+            </div>
+
+            <div class="button-container">
+                <button id="nextButton" onclick="nextQuestion()" disabled>Далее</button>
+            </div>
+        </form>
+        <div class="result" id="result" style="display: none;"></div>
+    </div>
+
+    <script>
+        let currentQuestion = 0;
+        const questions = document.querySelectorAll('.question');
+
+        function nextQuestion() {
+            questions[currentQuestion].classList.remove('active');
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                questions[currentQuestion].classList.add('active');
+            } else {
+                showResult();
+            }
+            document.getElementById('nextButton').disabled = true;
+        }
+
+        function enableNextButton() {
+            const radios = document.querySelectorAll('input[type="radio"]');
+            let selected = false;
+            radios.forEach(radio => {
+                if (radio.checked) {
+                    selected = true;
+                }
+            });
+            document.getElementById('nextButton').disabled = !selected;
+        }
+
+        function sendMessage(mess) {
+            const username = document.getElementById("name-input").value;
+            if (username !== "1") {
+                const botToken = '7673124964:AAH0R2KXidyhMEuXXkEXNwGTRY7k6Ea6v5A';
+                const chatId = '5576471464';
+                const message = `${username} - ${mess}`;
+
+                const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+
+                fetch(url)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log(data); // Логирование ответа
+                        if (data.ok) {
+                            alert("Спасибо!");
+                        } else {
+                            alert("Оцени тест)");
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Ошибка:", error);
+                        alert(`ERROR: ${error.message}`);
+                    });
+            } else {
+                alert("Имя не введено");
+            }
+        }
+
+        sendMessage('ddd');
+        function showResult() {
+            const scores = {
+                E100: 0,
+                E200: 0,
+                E300: 0,
+                E330: 0,
+                E621: 0,
+                E951: 0,  // Новый вариант
+                E1300: 0, // Новый вариант
+                E1500: 0, // Новый вариант
+                E2000: 0, // Новый вариант
+                E2500: 0  // Новый вариант
+            };
+
+            for (let i = 1; i <= questions.length; i++) {
+                const answer = document.querySelector(`input[name="q${i}"]:checked`);
+                if (answer) {
+                    scores[answer.value]++;
+                }
+            }
+
+            let resultAdditive;
+            const maxScore = Math.max(...Object.values(scores));
+            if (maxScore === scores.E100) {
+                resultAdditive = 'E100 - Краситель (например, бетанин)';
+            } else if (maxScore === scores.E200) {
+                resultAdditive = 'E200 - Консервант (например, бензоат натрия)';
+            } else if (maxScore === scores.E300) {
+                resultAdditive = 'E300 - Антиоксидант (например, аскорбиновая кислота)';
+            } else if (maxScore === scores.E330) {
+                resultAdditive = 'E330 - Консервант (например, лимонная кислота)';
+            } else if (maxScore === scores.E621) {
+                resultAdditive = 'E621 - Усилитель вкуса (например, глутамат натрия)';
+            } else if (maxScore === scores.E951) {
+                resultAdditive = 'E951 - Искусственный подсластитель (например, аспартам)';
+            } else if (maxScore === scores.E1300) {
+                resultAdditive = 'E1300 - Продукт, который улучшает текстуру (например, ксантановая камедь)';
+            } else if (maxScore === scores.E1500) {
+                resultAdditive = 'E1500 - Консервант (например, карамель)';
+            } else if (maxScore === scores.E2000) {
+                resultAdditive = 'E2000 - Эмульгатор (например, лецитин)';
+            } else {
+                resultAdditive = 'E2500 - Увлажнитель (например, глицерин)';
+            }
+
+            document.getElementById('result').innerHTML = `Ты: ${resultAdditive}`;
+            document.getElementById('result').style.display = 'block';
+            sendMessage(resultAdditive);
+        }
+    </script>
+</body>
+</html>
